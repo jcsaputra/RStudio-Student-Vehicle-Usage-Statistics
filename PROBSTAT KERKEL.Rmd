@@ -1,0 +1,402 @@
+
+
+```{r}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+
+MyDataPrimer <- read_excel("Survei mengenai kendaraan terhadap Mahasiswa UMN (Jawaban).xlsx", sheet="Form Responses 1")
+str(MyDataPrimer)
+head(MyDataPrimer)
+tail(MyDataPrimer)
+
+MyDataSekunder1 <- read_excel("Data Sekunder.xlsx", sheet = "Sheet1")
+str(MyDataSekunder1)
+str(MyDataSekunder1)
+str(MyDataSekunder1)
+
+
+MyDataSekunder2 <- read_excel("Data Sekunder.xlsx", sheet = "Sheet2")
+str(MyDataSekunder2)
+str(MyDataSekunder2)
+str(MyDataSekunder2)
+
+
+MyDataSekunder3 <- read_excel("Data Sekunder.xlsx", sheet = "Sheet3")
+str(MyDataSekunder3)
+str(MyDataSekunder3)
+str(MyDataSekunder3)
+
+MyDataSekunder4 <- read_excel("Data Sekunder.xlsx", sheet = "Sheet4")
+str(MyDataSekunder4)
+str(MyDataSekunder4)
+str(MyDataSekunder4)
+##Mutate/Mengubah data
+
+
+MyDataPrimer<- MyDataPrimer %>%
+mutate('Apa jenis kelmin kamu?' = recode(`Apa jenis kelmin kamu?`,
+                                "Pria" = 1,
+                                "Wanita" = 2))
+
+MyDataPrimer<- MyDataPrimer %>%
+mutate('Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?' = recode(`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`,
+                                "Ya" = 1,
+                                "Tidak" = 2))
+
+MyDataPrimer<- MyDataPrimer %>%
+mutate('Transportasi apa yang kamu gunakan?' = recode(`Transportasi apa yang kamu gunakan?`,
+                                "Kendaraan Pribadi" = 1,
+                                "Ojek Online" = 2,
+                                "Taxi Online" = 3,
+                                "Transportasi Umum" = 4,
+                                "Menyesuaikan Kebutuhan" = 5,
+                                 "Kendaraan Dinas" = 6,
+                                "Taxi" = 7,
+                                "Ojek Panggilan" = 8,
+                                "Kombinasi Moda Transportasi" = 9,
+
+))
+
+MyDataPrimer<- MyDataPrimer %>%
+mutate('Berapa Lama Kamu menempuh di perjalanan?' = recode(`Berapa Lama Kamu menempuh di perjalanan?`,
+                                "Dibawah 30 Menit" = 1,
+                                "30-60 Menit" = 2,
+                                "1-2 Jam" = 3,
+                                "2-3 Jam" = 4,
+                                "3 Jam" = 5))
+
+MyDataPrimer<- MyDataPrimer %>%
+mutate('Berapa jarak tempuh menggunakan kendaraan perhari?' = recode(`Berapa jarak tempuh menggunakan kendaraan perhari?`,
+                                "Dibawah 5 KM" = 1,
+                                "5-10 KM" = 2,
+                                "10-20 KM" = 3,
+                                "Diatas 20 Km" = 4))
+
+
+MyDataPrimer<- MyDataPrimer %>%
+mutate('Seberapa sering anda menggunakan Pertalite?' = recode(`Seberapa sering anda menggunakan Pertalite?`,
+                                "Tidak Tahu" = 1,
+                                "Tidak Menggunakan" = 2,
+                                "Sekali Sebulan" = 3,
+                                "2-3 kali sebulan" = 4,
+                                "Seminggu Sekali" = 5,
+                                 "2-3 kali seminggu" = 6,
+
+))
+
+##1
+##Demonstrate statistik descriptive
+##Apa Jenis Kelamin Kamu?
+median(MyDataPrimer$`Apa jenis kelmin kamu?`, na.rm = TRUE)
+
+mean(MyDataPrimer$`Apa jenis kelmin kamu?`, na.rm = TRUE)
+
+sd(MyDataPrimer$`Apa jenis kelmin kamu?`, na.rm = TRUE)
+
+var(MyDataPrimer$`Apa jenis kelmin kamu?`, na.rm = TRUE)
+
+min(MyDataPrimer$`Apa jenis kelmin kamu?`, na.rm = TRUE)
+
+max(MyDataPrimer$`Apa jenis kelmin kamu?`, na.rm = TRUE)
+
+range(MyDataPrimer$`Apa jenis kelmin kamu?`, na.rm = TRUE)
+
+
+
+
+##Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?
+median(MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`, na.rm = TRUE)
+
+mean(MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`, na.rm = TRUE)
+
+ sd(MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`, na.rm = TRUE)
+
+var(MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`, na.rm = TRUE)
+
+min(MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`, na.rm = TRUE)
+
+max(MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`, na.rm = TRUE)
+
+range(MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`, na.rm = TRUE)
+
+
+##Berapa Umur anda?
+median(MyDataPrimer$`Berapa Umur anda?`, na.rm = TRUE)
+
+mean(MyDataPrimer$`Berapa Umur anda?`, na.rm = TRUE)
+
+sd(MyDataPrimer$`Berapa Umur anda?`, na.rm = TRUE)
+
+var(MyDataPrimer$`Berapa Umur anda?`, na.rm = TRUE)
+
+min(MyDataPrimer$`Berapa Umur anda?`, na.rm = TRUE)
+
+max(MyDataPrimer$`Berapa Umur anda?`, na.rm = TRUE)
+
+range(MyDataPrimer$`Berapa Umur anda?`, na.rm = TRUE)
+
+
+##Transportasi apa yang kamu gunakan?
+ median(MyDataPrimer$`Transportasi apa yang kamu gunakan?`, na.rm = TRUE)
+mean(MyDataPrimer$`Transportasi apa yang kamu gunakan?`, na.rm = TRUE)
+
+sd(MyDataPrimer$`Transportasi apa yang kamu gunakan?`, na.rm = TRUE)
+
+ var(MyDataPrimer$`Transportasi apa yang kamu gunakan?`, na.rm = TRUE)
+
+min(MyDataPrimer$`Transportasi apa yang kamu gunakan?`, na.rm = TRUE)
+
+max(MyDataPrimer$`Transportasi apa yang kamu gunakan?`, na.rm = TRUE)
+
+range(MyDataPrimer$`Transportasi apa yang kamu gunakan?`, na.rm = TRUE)
+
+
+##Berapa Lama Kamu menempuh di perjalanan?
+
+ median(MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`, na.rm = TRUE)
+
+mean(MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`, na.rm = TRUE)
+
+ sd(MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`, na.rm = TRUE)
+var(MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`, na.rm = TRUE)
+
+min(MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`, na.rm = TRUE)
+
+ max(MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`, na.rm = TRUE)
+
+ range(MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`, na.rm = TRUE)
+
+
+##Berapa jarak tempuh menggunakan kendaraan perhari?
+
+median(MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`, na.rm = TRUE)
+
+ mean(MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`, na.rm = TRUE)
+ 
+sd(MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`, na.rm = TRUE)
+
+var(MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`, na.rm = TRUE)
+
+min(MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`, na.rm = TRUE)
+
+max(MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`, na.rm = TRUE)
+
+range(MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`, na.rm = TRUE)
+
+##Seberapa sering anda menggunakan Pertalite?
+
+median(MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`, na.rm = TRUE)
+
+ mean(MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`, na.rm = TRUE)
+
+sd(MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`, na.rm = TRUE)
+
+var(MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`, na.rm = TRUE)
+min(MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`, na.rm = TRUE)
+
+max(MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`, na.rm = TRUE)
+
+range(MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`, na.rm = TRUE)
+
+
+##
+##Gaussian
+##Jenis Kelamin
+shapiro.test(MyDataPrimer$`Apa jenis kelmin kamu?`)
+
+barplot(Kelamin,main="Jenis Kelamin",col=rainbow(2), ylim = c(0,100), ylab = "Jumlah Responden Mahasiswa", xlab = "Jenis Kelamin")
+qcc::pareto.chart(Kelamin, main="Jenis Kelamin Mahasiswa")
+
+Kelamin <-table(MyDataPrimer$`Apa jenis kelmin kamu?`)
+View(Kelamin)
+
+##Apakah Kamu mempunyai kendaraan atau menggunakan transportasi
+shapiro.test(MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`)
+
+barplot(Transportasi,main="Kepemilikan Transportasi",col=rainbow(2), ylim = c(0,100), ylab = "Jumlah Responden Mahasiswa", xlab = "Kepemilikan Transportasi")
+
+qcc::pareto.chart(Transportasi, main="Kepemilikan Transportasi")
+Transportasi <-table(MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`)
+View(Transportasi)
+
+##Berapa Umur anda
+shapiro.test(MyDataPrimer$`Berapa Umur anda?`)
+
+barplot(umur,main="Umur Mahasiswa",col=rainbow(8), ylim = c(0,100), ylab = "Jumlah Responden Mahasiswa", xlab = "Umur")
+
+umur <-table(MyDataPrimer$`Berapa Umur anda?`)
+View(umur)
+qcc::pareto.chart(umur, main="umur")
+
+##Transportasi apa yang kamu gunakan?
+shapiro.test(MyDataPrimer$`Transportasi apa yang kamu gunakan?`)
+
+barplot(jenistransport,main="Jenis Transportasi Mahasiswa",col=rainbow(8), ylim = c(0,100), ylab = "Jumlah Responden Mahasiswa", xlab = "Jenis Transportasi")
+
+jenistransport <-table(MyDataPrimer$`Transportasi apa yang kamu gunakan?`)
+View(jenistransport)
+qcc::pareto.chart(jenistransport, main="Jenis Transportasi")
+
+
+
+##Berapa lama kamu menempuh di pejralanan
+shapiro.test(MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`)
+
+barplot(LamaJalan,main="Berapa Lama menempuh di perjalanan",col=rainbow(6), ylim = c(0,100), ylab = "Jumlah Responden Mahasiswa", xlab = "Menempuh Perjalanan")
+
+LamaJalan <-table(MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`)
+View(LamaJalan)
+qcc::pareto.chart(LamaJalan, main="Berapa Lama Mahasiswa menempuh di perjalanan")
+
+##Berapa jarak tempuh menggunakan kendaraan perhari?
+shapiro.test(MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`)
+
+barplot(jarak,main="jarak Tempuh Mahasiswa",col=rainbow(4), ylim = c(0,100), ylab = "Jumlah Responden Mahasiswa", xlab = "Jarak Tempuh")
+
+
+jarak <-table(MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`)
+View(jarak)
+qcc::pareto.chart(jarak, main="Jarak Tempuh")
+
+##Seberapa sering anda menggunakan Pertalite?
+shapiro.test(MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`)
+
+barplot(pertalite,main="Penggunaan Pertalite Mahasiswa",col=rainbow(6), ylim = c(0,100), ylab = "Jumlah Responden Mahasiswa", xlab = "Penggunaan Pertalite Mahasiswa")
+
+pertalite <-table(MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`)
+View(pertalite)
+qcc::pareto.chart(jarak, main="Penggunaan Pertalite Mahasiswa")
+```
+
+```{r}
+##...
+
+##Inference of mean one population
+##Apa jenis kelmin kamu
+ t.test(MyDataPrimer$`Apa jenis kelmin kamu?`, mu = 0)
+# 
+# ##Apakah Kamu mempunyai kendaraan atau menggunakan transportasi
+ t.test(MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`, mu = 0)
+# 
+# ##Berapa Umur anda
+t.test(MyDataPrimer$`Berapa Umur anda?`, mu = 0)
+# 
+# ##Transportasi apa yang kamu gunakan
+t.test(MyDataPrimer$`Transportasi apa yang kamu gunakan?`, mu = 0)
+# 
+# ##Berapa Lama Kamu menempuh di perjalanan
+t.test(MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`, mu = 0)
+# 
+# ##Berapa jarak tempuh menggunakan kendaraan perhari
+t.test(MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`, mu = 0)
+# 
+# ##Seberapa sering anda menggunakan Pertalite
+t.test(MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`, mu = 0)
+
+
+##Inference of mean on two sample population
+#Mean umur 21 dan kebawah dan diatas 21 
+data21kebawah<-MyDataPrimer$`Berapa Umur anda?`<="21"
+
+data21keatas<-MyDataPrimer$`Berapa Umur anda?`>"21"
+
+t.test(data21keatas, data21kebawah)
+
+#Berapa jarak tempuh menggunakan kendaraan perhari?
+data21jamkebawah<-MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`<="2"
+data21jamkeatas<-MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`>"2"
+t.test(data21jamkeatas,data21jamkebawah)
+
+#Seberapa sering anda menggunakan Pertalite?
+datapertalite3<-MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`<="3"
+datapertalite3atas<-MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`>"3"
+t.test(datapertalite3,datapertalite3atas)
+
+
+##Inference mean pada jenis kelamin
+t.test(MyDataPrimer$`Apa jenis kelmin kamu?`,MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`)
+
+t.test(MyDataPrimer$`Berapa Umur anda?`)
+##Hipotesis
+
+#Hipotesis pertama
+#H0= Rata rata pria yang memiliki kendaraan atau menggunakan transportasi lebih tinggi/banyak dibanding Wanita yang memiliki kendaraan atau menggunakan transportasi
+#H1=Rata rata pria yang memiliki kendaraan atau menggunakan transportasi tidak lebih tinggi/banyak dibanding Wanita yang memiliki kendaraan atau menggunakan transportasi
+datapria<-MyDataPrimer$`Apa jenis kelmin kamu?`=="1" & MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`=="1"
+
+datawanita<-MyDataPrimer$`Apa jenis kelmin kamu?`=="2" & MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`=="1"
+t.test(datapria,datawanita)
+
+#Hipotesis Kedua
+#H0= Umur Rata rata yang memiliki kendaraan atau menggunakan transportasi  sama dengan dan lebih rendah dari 21,
+#H1=Umur Rata rata yang memiliki kendaraan atau menggunakan transportasi lebih tinggi dari 21,
+data21kebawah<-MyDataPrimer$`Berapa Umur anda?`<="21" & MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`=="1"
+
+data21keatas<-MyDataPrimer$`Berapa Umur anda?`>="21"& MyDataPrimer$`Apakah Kamu mempunyai kendaraan atau menggunakan transportasi?`=="1"
+
+t.test(data21keatas,data21kebawah)
+
+
+
+#Hipotesis ketiga
+#H0=Pria lebih sering mengisi pertalite (diatas sama dengan sekali seminggu) dari pada Wanita
+#H0=Pria tidak lebih sering mengisi pertalite (diatas sama dengan sekali seminggu) dari pada Wanita
+
+datapriapertalite<-MyDataPrimer$`Apa jenis kelmin kamu?`=="1" & MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`>="5"
+
+datawanitapertalite<-MyDataPrimer$`Apa jenis kelmin kamu?`=="2" & MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`<"5"
+t.test(datapriapertalite,datawanitapertalite)
+
+
+
+MyDataPrimear$kendaraan_transportasi
+
+#Hipotesis keempat
+#H0= Tidak Ada perbedaan signifikan antara data berapa lama kamu menempuh di perjalanan dan seberapa sering anda menggunakan pertalite
+#HA= Ada perbedaan signifikan antara data berapa lama kamu menempuh di perjalanan dan seberapa sering anda menggunakan pertalite
+MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`<-as.factor(MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`)
+MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`<-as.factor(MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`)
+annova_test<-aov(MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`~ MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`, data=MyDataPrimer)
+summary(annova_test)
+TukeyHSD(annova_test, conf.level = 0.95)
+
+
+annova_test<-lm(MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`~ MyDataPrimer$`Seberapa sering anda menggunakan Pertalite?`, data=MyDataPrimer)
+
+ plot(MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`, pch = 80, col = "blue")
+abline(annova_test)
+plot.new
+
+#MENGGUNAKAN DATA SEKUNDER Ubah ke dataframe dengan 1000 responden(Dari presentase dikasli 1000 agar dapat digunakan)
+df <- data.frame(berapalama = c(rep("5",14),rep("4",56),rep("3",132),rep("2",356),rep("1",442)),
+                 pertalite = c(rep("1",51),rep("2",96),rep("3",50),rep("4",46),rep("5",217),rep("6",540)))
+annova_testsek<- aov(df$berapalama~df$pertalite)
+summary(annova_testsek)
+TukeyHSD(annova_testsek, conf.level = 0.95)
+
+
+#Hipotesis kelima
+#H0= ada relasi yang kuat antara data Berapa lama kamu menempuh di perjalanan dan Berapa jarak tempuh menggunakan kendaraan perhari?
+#HA= Tidak ada relasi yang kuat antara data Berapa lama kamu menempuh di perjalanan dan Berapa jarak tempuh menggunakan kendaraan perhari?
+result <- cor.test(MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`, MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`, method = "pearson")
+print(result)
+
+#Saat menggunakan data sekunder
+df2 <- data.frame(berapalama = c(rep("5",14),rep("4",56),rep("3",132),rep("2",356),rep("1",442)),
+                 berapajauh = c(rep("1",116),rep("2",273),rep("3",294),rep("4",317)))
+df2$berapalama<- as.numeric(df2$berapalama)
+df2$berapajauh<-as.numeric(df2$berapajauh)
+resultsek<- cor.test(df2$berapalama,df2$berapajauh, method = "pearson")
+print(resultsek)
+#Hipotesis keenam
+#h0= Tidak ada perbedaan signifikan antara berapa lama kamu menempuh di perjalanan dan berapa jarak tempuh menggunakan kendaraan per hari.
+#h0= ada perbedaan signifikan antara berapa lama kamu menempuh di perjalanan dan berapa jarak tempuh menggunakan kendaraan per hari.
+
+wilcox.test(MyDataPrimer$`Berapa Lama Kamu menempuh di perjalanan?`, MyDataPrimer$`Berapa jarak tempuh menggunakan kendaraan perhari?`)
+
+#Menggunakan data sekunder
+wilcox.test(df2$berapalama, df2$berapajauh)
+
+````
+
